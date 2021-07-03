@@ -1,0 +1,33 @@
+server:
+  port: ${PORT:80}
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启动态路由
+          lower-case-service-id: true #服务名称转小写
+  #routes:    写限流内容
+  rabbitmq:
+    host: localhost
+    username: admin
+    password: admin
+    virtual-host: v-phoenix
+    port: 5672
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  #暴露健康检查端点，让服务可被监控
+path: #放行的路径
+  pass:
+    - /oauth/token
+IP: #ip白名单
+  writeList:
+    - localhost
+    - 127.0.0.1
